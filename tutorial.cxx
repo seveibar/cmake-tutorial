@@ -22,7 +22,11 @@ int main (int argc, char *argv[])
 #ifdef USE_MYMATH
   double outputValue = mysqrt(inputValue);
 #else
+#if defined (HAVE_LOG) && defined (HAVE_EXP)
+  double outputValue = exp(log(x * .5) * 8)
+#else
   double outputValue = sqrt(inputValue);
+#endif
 #endif
  
   fprintf(stdout,"The square root of %g is %g\n",
